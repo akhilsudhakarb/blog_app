@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block contend %}
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="col-lg-10 mx-auto border rounded pt-4 pb-4">
+            <form action="" method="post">{% csrf_token %}
+                <div class="form-group"><h3 class="text-center">Edit Article</h3></div>
+
+                    {{form.as_p}}
+
+                 <div>
+
+                    <input type="submit" class="btn btn-sm btn-info col-lg-2" value="Update">
+
+                    <a href="/" class="btn btn-sm btn-info col-lg-2">Cancel</a>
+                 </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<p>You are not allowed.</p>
+{% endif %}
+{% endblock %}

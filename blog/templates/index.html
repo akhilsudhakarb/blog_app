@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block contend %}
+
+<div class="container">
+    <div class="row">
+        {% for blog in object_list %}
+        <div class="col-lg-4 p-3">
+            <div class="card" style="width: 18rem;">
+                <img src="{{blog.image.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{blog.title}} - by {{blog.author}}</h5>
+                      <small>By {{blog.author}}</small><small>- {{blog.date}}</small><hr>
+                    <p class="card-text">{{blog.content|slice:":100"}}</p>
+                    <a href="{% url 'article-detail' blog.pk %}" class="btn btn-primary">Readmore</a>
+                    {% if user.is_authenticated %}
+                        {% if user.id == blog.author.id %}
+                            <a href="{% url 'update-article' blog.pk %}" class="btn btn-info">Edit</a>
+                            <a href="{% url 'delete-article' blog.pk %}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock %}
